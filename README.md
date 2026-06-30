@@ -39,6 +39,35 @@ With Eve:  sifted key 303 bits, QBER 0.254  -> attack detected
 ```
 ![BB84 QBER](figures/bb84_qber.png)
 
+## Running on real quantum hardware
+
+The protocols above run on a perfect, noiseless simulator. To see what real
+qubits actually do, `src/run_on_hardware.py` runs a Bell pair on an IBM
+superconducting quantum processor and compares it to the ideal simulator.
+
+A Bell pair should produce **only** `00` and `11` (the two qubits always agree).
+On the real **156-qubit `ibm_fez` (Heron r2)** processor:
+
+| Outcome | Ideal simulator | Real hardware (`ibm_fez`) |
+|---------|-----------------|---------------------------|
+| `00`    | 1021            | 972                       |
+| `11`    | 1027            | 992                       |
+| `01`    | 0               | 32                        |
+| `10`    | 0               | 52                        |
+
+The entanglement survives **95.9%** of the time; the `01`/`10` outcomes — which
+are physically forbidden for an ideal Bell pair — appear at a **4.1% error rate**
+from real device noise (readout error, two-qubit-gate error, and T₁/T₂
+decoherence). The `10` > `01` asymmetry is consistent with T₁ relaxation of the
+excited state plus qubit-specific readout error.
+
+![Bell pair: simulator vs hardware](figures/bell_sim_vs_hardware.png)
+
+```bash
+# requires a free IBM Quantum account (credentials saved once)
+python src/run_on_hardware.py
+```
+
 ## Run it
 
 ```bash
