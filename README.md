@@ -61,7 +61,7 @@ from real device noise (readout error, two-qubit-gate error, and T₁/T₂
 decoherence). The `10` > `01` asymmetry is consistent with T₁ relaxation of the
 excited state plus qubit-specific readout error.
 
-![Bell pair: simulator vs hardware](figures/bell_sim_vs_hardware.png)
+![Bell pair: simulator vs hardware](figures/bellpair_hadware_vs_simulator.png)
 
 ```bash
 # requires a free IBM Quantum account (credentials saved once)
